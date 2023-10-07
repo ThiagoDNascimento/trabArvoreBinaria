@@ -18,7 +18,7 @@ public class No<T> {
     }
 
     private int obterAltura(No<T> r){
-        if(r=null){
+        if(r==null){
             return -1;
         }else{
             int hd = obterAltura(r.getFilhoDireita());
