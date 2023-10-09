@@ -19,13 +19,52 @@ public class ArvoreBinaria<T> implements IArvoreBinaria<T> {
 
     @Override
     public void adicionar(T novoValor) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        No<T> novoNo = new No<T>(novoValor);
+        if(this.raiz == null){
+            this.raiz = novoNo;
+        }
+        else{
+            this.raiz = adicionar(this.raiz,novoNo);
+        }
     }
+    private No<T> adicionar(No<T> atual, No<T> novoNo){
+        if(comparador.compare(novoNo.getValor(), atual.getValor()) < 0){ // se for menor vai pra esquerda
+            if(atual.getFilhoEsquerda() == null){
+                atual.setFilhoEsquerda(novoNo);
+            }
+            else{
+                atual.setFilhoEsquerda(adicionar(atual.getFilhoEsquerda(), novoNo));
+            }
+        }
+        else{ // se for maior vai pra direita
+            if(atual.getFilhoDireita() == null){
+                atual.setFilhoDireita(novoNo);
+            }
+            else{
+                atual.setFilhoDireita(adicionar(atual.getFilhoDireita(), novoNo));
+            }
+        }
+        return atual;
+    }
+
 
     @Override
     public T pesquisar(T valor) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        No<T> atual = this.raiz;
+        while(atual != null){
+            if(atual.getValor().equals(valor)){
+                return atual.getValor();
+            }
+            else if(comparador.compare(atual.getValor(), valor) < 0){
+                atual.getFilhoEsquerda();
+            }
+            else{
+                atual.getFilhoDireita();
+            }
+        }
+        return null;
     }
+
 
     @Override
     public T remover(T valor) {
@@ -34,7 +73,7 @@ public class ArvoreBinaria<T> implements IArvoreBinaria<T> {
 
     @Override
     public int altura() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return this.raiz.obterAltura();
     }
        
     

@@ -17,12 +17,12 @@ public class No<T> {
         return obterAltura(this);
     }
 
-    private int obterAltura(No<T> r){
-        if(r==null){
+    private int obterAltura(No<T> raiz){
+        if(raiz == null){ //se a raiz for nula retorna -1
             return -1;
         }else{
-            int hd = obterAltura(r.getFilhoDireita());
-            int he = obterAltura(r.getFilhoEsquerda());
+            int hd = obterAltura(raiz.getFilhoDireita());
+            int he = obterAltura(raiz.getFilhoEsquerda());
             if(hd > he){
                 return hd+1;
             }else{
