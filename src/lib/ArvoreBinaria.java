@@ -55,10 +55,10 @@ public class ArvoreBinaria<T> implements IArvoreBinaria<T> {
             if(atual.getValor().equals(valor)){
                 return atual.getValor();
             }
-            else if(comparador.compare(atual.getValor(), valor) < 0){
+            else if(comparador.compare(atual.getValor(), valor) < 0){ // se for menor vai pra esquerda
                 atual.getFilhoEsquerda();
             }
-            else{
+            else{ // se for maior vai pra direita
                 atual.getFilhoDireita();
             }
         }
@@ -79,7 +79,16 @@ public class ArvoreBinaria<T> implements IArvoreBinaria<T> {
     
     @Override
     public int quantidadeNos() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return quantidadeNos(this.raiz);
+    }
+    
+    private int quantidadeNos(No<T> no){
+        if(no == null){
+            return 0;
+        }else{
+            return 1 + quantidadeNos(no.getFilhoEsquerda()) + quantidadeNos(no.getFilhoDireita());
+        }        
+
     }
 
     @Override
